@@ -1,0 +1,1956 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06110f">
+<meta name="description" content="Sphere early user pool, crypto market information, staking calculator and ecosystem resources.">
+<title>Sphere — Early User Pool</title>
+
+<style>
+:root{
+--bg:#050b0b;
+--panel:#0b1715;
+--panel2:#10211d;
+--line:#1b3931;
+--green:#00e6a0;
+--green2:#00b982;
+--text:#f4faf7;
+--muted:#9bb2a9;
+--blue:#3987ff;
+--purple:#a875ff;
+--red:#ff737d;
+--radius:20px;
+--shadow:0 18px 55px #0008
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+
+body{
+margin:0;
+background:radial-gradient(ellipse at 78% 8%,#063b2d55,transparent 32%),var(--bg);
+color:var(--text);
+font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+}
+
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.wrap{
+width:min(1180px,calc(100% - 40px));
+margin:auto
+}
+
+.topbar{
+position:sticky;
+top:0;
+z-index:20;
+background:#050b0be8;
+backdrop-filter:blur(16px);
+border-bottom:1px solid #17342c
+}
+
+.nav{
+height:76px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:22px
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:25px;
+font-weight:800;
+letter-spacing:-1px
+}
+
+.logo{
+width:39px;
+height:39px;
+border-radius:12px;
+background:linear-gradient(145deg,#1bffb8,#007d5a);
+display:grid;
+place-items:center;
+color:#03120d;
+font-size:24px;
+font-weight:900;
+box-shadow:0 0 28px #00e6a044
+}
+
+.navlinks{
+display:flex;
+align-items:center;
+gap:25px;
+color:#c2d1ca;
+font-weight:600
+}
+
+.navlinks a:hover{color:var(--green)}
+
+.btn{
+border:1px solid var(--green);
+border-radius:999px;
+padding:12px 20px;
+background:var(--green);
+color:#03130d;
+font-weight:800;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:9px;
+transition:.2s
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 28px #00e6a044
+}
+
+.btn.ghost{
+background:transparent;
+color:var(--text)
+}
+
+.btn.small{
+padding:9px 15px;
+font-size:13px
+}
+
+.menu{
+display:none;
+background:none;
+border:0;
+color:white;
+font-size:25px
+}
+
+.hero{
+padding:70px 0 48px;
+min-height:620px;
+display:grid;
+grid-template-columns:1.05fr .95fr;
+gap:34px;
+align-items:center
+}
+
+.eyebrow{
+display:inline-flex;
+align-items:center;
+gap:9px;
+border:1px solid #00e6a077;
+color:var(--green);
+background:#00e6a010;
+border-radius:99px;
+padding:7px 14px;
+font-size:12px;
+font-weight:800;
+letter-spacing:2px
+}
+
+.hero h1{
+font-size:clamp(42px,6vw,76px);
+line-height:.99;
+letter-spacing:-3.5px;
+margin:22px 0 18px
+}
+
+.glow{
+color:var(--green);
+text-shadow:0 0 35px #00e6a066
+}
+
+.lead{
+font-size:18px;
+color:#c4d4cd;
+max-width:570px
+}
+
+.lead strong{color:white}
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin:28px 0
+}
+
+.stat{
+padding:17px;
+border:1px solid #17614a;
+background:linear-gradient(135deg,#0d2820,#07110f);
+border-radius:17px
+}
+
+.stat b{
+font-size:27px;
+display:block;
+letter-spacing:-1px
+}
+
+.stat span{
+color:var(--muted);
+font-size:13px
+}
+
+.actions{
+display:flex;
+gap:12px;
+flex-wrap:wrap
+}
+
+.partners{
+display:flex;
+align-items:center;
+gap:20px;
+margin-top:30px;
+color:#bdcbc4;
+font-weight:700
+}
+
+.partner{
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.partner i{
+font-style:normal;
+color:var(--blue);
+font-size:21px
+}
+
+.partner.monad i{color:var(--purple)}
+
+.hero-art{
+min-height:450px;
+position:relative;
+display:grid;
+place-items:center;
+overflow:hidden
+}
+
+.orb{
+width:min(390px,80vw);
+aspect-ratio:1;
+border-radius:50%;
+background:radial-gradient(circle at 35% 28%,#39ffd1,#087a60 30%,#052b24 62%,#020908 72%);
+box-shadow:0 0 70px #00e6a044,inset -25px -35px 55px #0009;
+position:relative;
+display:grid;
+place-items:center;
+border:1px solid #43ffd477
+}
+
+.orb:before,.orb:after{
+content:"";
+position:absolute;
+width:125%;
+height:38%;
+border:2px solid #00e6a0aa;
+border-radius:50%;
+transform:rotate(-20deg);
+box-shadow:0 0 22px #00e6a055
+}
+
+.orb:after{
+transform:rotate(42deg);
+width:140%;
+height:28%;
+border-color:#32bfff77
+}
+
+.coin{
+width:150px;
+height:150px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:70px;
+font-weight:900;
+color:#071a14;
+background:linear-gradient(145deg,#7dffe0,#00a978);
+box-shadow:0 15px 55px #000a,inset -12px -14px 24px #006344;
+z-index:2
+}
+
+.float{
+position:absolute;
+border:1px solid #ffffff30;
+background:#0b1a19ee;
+border-radius:16px;
+padding:12px 16px;
+box-shadow:var(--shadow);
+font-weight:800
+}
+
+.float small{
+display:block;
+color:var(--muted);
+font-weight:500
+}
+
+.float.one{top:13%;left:0}
+.float.two{right:0;bottom:16%}
+.float.three{top:18%;right:2%;color:var(--green)}
+
+.trustbar{
+border-block:1px solid #14372d;
+background:#071410;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:12px;
+padding:20px 0
+}
+
+.trust{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+color:#d2e0d9;
+font-weight:650;
+font-size:13px
+}
+
+.trust b{
+color:var(--green);
+font-size:21px
+}
+
+.section{padding:82px 0}
+
+.section-head{
+display:flex;
+align-items:end;
+justify-content:space-between;
+gap:20px;
+margin-bottom:28px
+}
+
+.kicker{
+color:var(--green);
+font-size:12px;
+font-weight:800;
+letter-spacing:2px;
+text-transform:uppercase
+}
+
+.section h2{
+font-size:clamp(29px,4vw,43px);
+line-height:1.1;
+letter-spacing:-1.5px;
+margin:8px 0
+}
+
+.sub{
+color:var(--muted);
+max-width:650px
+}
+
+.grid{display:grid;gap:16px}
+.market-grid{grid-template-columns:repeat(4,1fr)}
+
+.card{
+background:linear-gradient(145deg,#0e1d19,#09110f);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:21px;
+box-shadow:var(--shadow)
+}
+
+.coinrow{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
+.coinname{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:800
+}
+
+.coinicon{
+width:35px;
+height:35px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#182c27;
+font-weight:900
+}
+
+.price{
+font-size:25px;
+font-weight:800;
+margin:17px 0 3px
+}
+
+.change{
+font-size:13px;
+font-weight:800
+}
+
+.positive{color:var(--green)}
+.negative{color:var(--red)}
+.muted{color:var(--muted)}
+
+.market-tools{
+display:flex;
+gap:10px;
+align-items:center
+}
+
+.field{
+width:100%;
+background:#06100e;
+border:1px solid #244238;
+color:white;
+border-radius:12px;
+padding:12px 14px;
+outline:none
+}
+
+.field:focus{border-color:var(--green)}
+
+.market-table{
+width:100%;
+border-collapse:collapse;
+margin-top:18px
+}
+
+.market-table th,.market-table td{
+text-align:left;
+padding:14px 10px;
+border-bottom:1px solid #1a3029
+}
+
+.market-table th{
+color:var(--muted);
+font-size:12px;
+text-transform:uppercase;
+letter-spacing:1px
+}
+
+.market-table td:last-child,
+.market-table th:last-child{text-align:right}
+
+.two{grid-template-columns:1.05fr .95fr}
+
+.calculator .row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.label{
+display:block;
+color:var(--muted);
+font-size:13px;
+margin:13px 0 7px
+}
+
+.result{
+background:#06251b;
+border:1px solid #126c4d;
+border-radius:15px;
+padding:17px;
+margin-top:18px
+}
+
+.result strong{
+font-size:28px;
+color:var(--green);
+display:block
+}
+
+.tabs{
+display:flex;
+gap:6px;
+background:#06100e;
+padding:5px;
+border-radius:12px;
+margin-bottom:17px
+}
+
+.tab{
+flex:1;
+border:0;
+border-radius:9px;
+padding:10px;
+background:transparent;
+color:var(--muted);
+font-weight:800
+}
+
+.tab.active{
+background:#12392b;
+color:var(--green)
+}
+
+.tradebox{display:grid;gap:12px}
+
+.tokenline{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.tokenline select{max-width:115px}
+
+.trade-note{
+font-size:12px;
+color:var(--muted)
+}
+
+.feature-grid{grid-template-columns:repeat(3,1fr)}
+
+.feature .icon{
+width:45px;
+height:45px;
+border-radius:14px;
+background:#0c3528;
+color:var(--green);
+display:grid;
+place-items:center;
+font-size:22px;
+margin-bottom:14px
+}
+
+.feature h3{margin:0 0 7px}
+.feature p{color:var(--muted);margin:0}
+
+.steps{grid-template-columns:repeat(3,1fr)}
+
+.stepnum{
+color:var(--green);
+font-size:13px;
+font-weight:900;
+letter-spacing:2px
+}
+
+.step h3{margin:8px 0}
+
+.promo{
+background:radial-gradient(ellipse at 80% 20%,#08714b55,transparent 45%),linear-gradient(120deg,#0c251d,#07100e);
+border:1px solid #176044;
+border-radius:25px;
+padding:35px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px
+}
+
+.promo h2{max-width:650px}
+
+.faq{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.faq details{
+padding:18px;
+border:1px solid var(--line);
+border-radius:14px;
+background:#0a1512
+}
+
+.faq summary{
+cursor:pointer;
+font-weight:800
+}
+
+.faq p{color:var(--muted)}
+
+footer{
+border-top:1px solid #19342c;
+padding:38px 0;
+color:var(--muted)
+}
+
+.foot{
+display:flex;
+justify-content:space-between;
+gap:20px;
+flex-wrap:wrap
+}
+
+.footlinks{
+display:flex;
+gap:18px;
+flex-wrap:wrap
+}
+
+.disclaimer{
+font-size:11px;
+color:#789087;
+max-width:900px;
+margin-top:20px
+}
+
+.toast{
+position:fixed;
+bottom:22px;
+left:50%;
+transform:translateX(-50%);
+background:#15382b;
+border:1px solid #27bd85;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+box-shadow:var(--shadow);
+z-index:99;
+display:none;
+max-width:90%;
+text-align:center
+}
+
+.status{
+font-size:12px;
+color:var(--muted)
+}
+
+@media(max-width:900px){
+.navlinks{
+display:none;
+position:absolute;
+top:76px;
+left:0;
+right:0;
+background:#07110f;
+padding:20px;
+flex-direction:column;
+border-bottom:1px solid var(--line)
+}
+
+.navlinks.open{display:flex}
+.menu{display:block}
+.nav>.btn{display:none}
+
+.hero{
+grid-template-columns:1fr;
+padding-top:55px
+}
+
+.hero-art{min-height:380px}
+.trustbar{grid-template-columns:repeat(2,1fr)}
+.market-grid{grid-template-columns:repeat(2,1fr)}
+.two{grid-template-columns:1fr}
+.feature-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:580px){
+.wrap{width:min(100% - 28px,1180px)}
+.hero h1{letter-spacing:-2px}
+.hero-art{min-height:310px}
+.orb{width:260px}
+.coin{width:105px;height:105px;font-size:48px}
+.float{font-size:12px;padding:9px}
+.float.one{left:0}
+.float.three{right:0}
+.stats{gap:8px}
+.stat{padding:13px}
+.stat b{font-size:21px}
+.actions .btn{width:100%}
+.partners{flex-wrap:wrap}
+.section{padding:60px 0}
+.section-head{
+align-items:start;
+flex-direction:column
+}
+.market-grid,.feature-grid,.steps,.faq{grid-template-columns:1fr}
+.market-table th:nth-child(3),
+.market-table td:nth-child(3){display:none}
+.calculator .row{grid-template-columns:1fr}
+.promo{padding:24px;display:block}
+.promo .btn{margin-top:15px}
+.trustbar{grid-template-columns:1fr 1fr}
+.trust{justify-content:flex-start}
+.price{font-size:22px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+<div class="wrap nav">
+
+<a class="brand" href="#home">
+<span class="logo">S</span>Sphere
+</a>
+
+<nav class="navlinks" id="navlinks">
+<a href="#home">Home</a>
+<a href="#pool">Pool</a>
+<a href="#markets">Markets</a>
+<a href="#staking">Staking</a>
+<a href="#trade">Trade</a>
+<a href="#security">Security</a>
+<a href="#learn">Learn</a>
+</nav>
+
+<a class="btn small" href="./eligibility.html">
+Explore Program <span>→</span>
+</a>
+
+<button class="menu" id="menu" aria-label="Toggle navigation">
+☰
+</button>
+
+</div>
+</header>
+
+<main>
+
+<section class="wrap hero" id="home">
+
+<div>
+
+<div class="eyebrow">
+ϟ EARLY ACCESS &nbsp;·&nbsp; CRYPTO REWARDS
+</div>
+
+<h1>
+The <span class="glow">$3M</span> Early User Pool Is Live.
+</h1>
+
+<p class="lead">
+Explore the <strong>$5,000 reward opportunity</strong>
+and discover a new way to engage with the crypto ecosystem.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<b>$3,000,000</b>
+<span>Active early-user pool</span>
+</div>
+
+<div class="stat">
+<b class="glow">$5,000</b>
+<span>Active individual reward opportunity</span>
+</div>
+
+</div>
+
+<div class="actions">
+
+<a class="btn" href="./eligibility.html">
+▤ Check Eligibility →
+</a>
+
+<a class="btn ghost" href="#markets">
+↗ Explore Market Prices
+</a>
+
+</div>
+
+<div class="partners">
+<span>Explore ecosystems:</span>
+
+<span class="partner">
+<i>⬡</i> Chainlink
+</span>
+
+<span class="partner monad">
+<i>◈</i> Monad
+</span>
+</div>
+
+</div>
+
+<div class="hero-art">
+
+<div class="orb">
+<div class="coin">S</div>
+</div>
+
+<div class="float one">
+◉ &nbsp; Early user pool
+<small>Program overview</small>
+</div>
+
+<div class="float two">
+↗ &nbsp; Market activity
+<small>Live market data below</small>
+</div>
+
+<div class="float three">
+● LIVE MARKETS
+</div>
+
+</div>
+</section>
+
+<div class="trustbar">
+
+<div class="trust"><b>◇</b> Security-first design</div>
+<div class="trust"><b>⌁</b> Market transparency</div>
+<div class="trust"><b>▣</b> Clear fee previews</div>
+<div class="trust"><b>↗</b> Fast interface</div>
+<div class="trust"><b>◎</b> Community focused</div>
+
+</div>
+
+<section class="section wrap" id="pool">
+
+<div class="section-head">
+
+<div>
+<div class="kicker">The early user pool</div>
+<h2>A new chapter in your crypto journey.</h2>
+<p class="sub">
+Explore the pool announcement, program information and participation journey in one place.
+</p>
+</div>
+
+<a class="btn ghost small" href="#faq">Read FAQs</a>
+
+</div>
+
+<div class="grid two">
+
+<div class="card">
+
+<div class="kicker">Program overview</div>
+
+<h2>$3,000,000</h2>
+
+<p class="muted">Active early-user pool size</p>
+
+<div class="result">
+<span class="muted">Active reward opportunity</span>
+<strong>$5,000</strong>
+<span class="status">
+Eligibility, availability and distribution are subject to published program terms.
+</span>
+</div>
+
+<a class="btn" style="margin-top:18px" href="./eligibility.html">
+Check Eligibility →
+</a>
+
+</div>
+
+<div class="card">
+
+<div class="kicker">Participation journey</div>
+
+<div class="grid steps">
+
+<div class="step">
+<div class="stepnum">01 / EXPLORE</div>
+<h3>Review terms</h3>
+<p class="muted">
+Understand program rules and eligibility before participating.
+</p>
+</div>
+
+<div class="step">
+<div class="stepnum">02 / CONNECT</div>
+<h3>Prepare wallet</h3>
+<p class="muted">
+Use a supported wallet only when the official integration is available.
+</p>
+</div>
+
+<div class="step">
+<div class="stepnum">03 / check if your wallet is eligible</div>
+<h3>Follow progress</h3>
+<p class="muted">
+Review your activity and reward status when account services launch.
+</p>
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section wrap" id="markets">
+
+<div class="section-head">
+
+<div>
+<div class="kicker">Market overview</div>
+<h2>Live prices. Clear perspective.</h2>
+<p class="sub">
+Market data is fetched from CoinGecko's public API.
+Prices can be delayed or unavailable if the provider rate-limits requests.
+</p>
+</div>
+
+<div class="status" id="marketStatus">
+Connecting to market data…
+</div>
+
+</div>
+
+<div class="grid market-grid" id="marketCards">
+
+<div class="card"><span class="muted">Loading Bitcoin…</span></div>
+<div class="card"><span class="muted">Loading Ethereum…</span></div>
+<div class="card"><span class="muted">Loading Solana…</span></div>
+<div class="card"><span class="muted">Loading Chainlink…</span></div>
+
+</div>
+
+<div class="card" style="margin-top:16px">
+
+<div class="section-head" style="margin-bottom:5px">
+
+<div>
+<h3 style="margin:0">Market watch</h3>
+<span class="status">USD · 24-hour performance</span>
+</div>
+
+<input
+class="field"
+id="marketSearch"
+placeholder="Search assets…"
+style="max-width:230px"
+>
+
+</div>
+
+<div style="overflow:auto">
+
+<table class="market-table">
+
+<thead>
+<tr>
+<th>Asset</th>
+<th>Price</th>
+<th>24h change</th>
+<th>Market cap</th>
+</tr>
+</thead>
+
+<tbody id="marketRows">
+<tr>
+<td colspan="4" class="muted">Fetching market data…</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+
+<div class="status" style="margin-top:12px">
+Source: CoinGecko · Refreshes approximately every 60 seconds ·
+<span id="lastUpdated">Not updated yet</span>
+</div>
+
+</div>
+</section>
+
+<section class="section wrap" id="staking">
+
+<div class="section-head">
+
+<div>
+<div class="kicker">Crypto staking</div>
+<h2>Estimate your staking rewards.</h2>
+<p class="sub">
+Explore our calculator. Actual rates, lockups, fees and rewards must be confirmed by the live program terms.
+</p>
+</div>
+
+</div>
+
+<div class="grid two">
+
+<div class="card calculator">
+
+<h3>Staking calculator</h3>
+
+<label class="label" for="stakeAmount">
+Amount to stake (USD)
+</label>
+
+<input
+class="field"
+id="stakeAmount"
+type="number"
+min="0"
+step="any"
+value="1000"
+>
+
+<div class="row">
+
+<div>
+<label class="label" for="stakeRate">
+Illustrative APY (%)
+</label>
+
+<input
+class="field"
+id="stakeRate"
+type="number"
+min="0"
+max="1000"
+step=".1"
+value="8"
+>
+</div>
+
+<div>
+<label class="label" for="stakeDays">
+Duration
+</label>
+
+<select class="field" id="stakeDays">
+<option value="30">30 days</option>
+<option value="90">90 days</option>
+<option value="180">180 days</option>
+<option value="365">365 days</option>
+</select>
+</div>
+
+</div>
+
+<div class="result">
+
+<span class="muted">Estimated reward (simple estimate)</span>
+
+<strong id="stakeReward">$6.58</strong>
+
+<span class="status" id="stakeTotal">
+Estimated total: $1,006.58
+</span>
+
+</div>
+
+<p class="trade-note">
+Explore our 35 apy per month,we ensured it's possible through partnership with chain link, monad and binance.
+</p>
+
+<a class="btn" href="./connect.html?action=stake">
+Connect to Stake →
+</a>
+
+</div>
+
+<div class="card">
+
+<div class="kicker">Understand staking</div>
+
+<h3>Put the mechanics first.</h3>
+
+<p class="muted">
+Staking may involve delegating or locking supported tokens to help secure a proof-of-stake network. Rewards and risks depend on the network and service model.
+</p>
+
+<ul class="muted">
+<li>Review validator and protocol risks.</li>
+<li>Check lockup and unbonding periods.</li>
+<li>Understand fees and reward variability.</li>
+<li>Never stake funds you cannot afford to lose.</li>
+</ul>
+
+<a class="btn ghost small" href="#security">
+Explore security approach →
+</a>
+
+</div>
+</div>
+</section>
+
+<section class="section wrap" id="trade">
+
+<div class="section-head">
+
+<div>
+<div class="kicker">Trade interface preview</div>
+<h2>Buy, sell and swap assets.</h2>
+<p class="sub">
+Explore our block chain level security,and our seamless trading platform.
+</p>
+</div>
+
+</div>
+
+<div class="grid two">
+
+<div class="card">
+
+<div class="tabs">
+
+<button class="tab active" data-mode="swap">Swap</button>
+<button class="tab" data-mode="buy">Buy</button>
+<button class="tab" data-mode="sell">Sell</button>
+
+</div>
+
+<div class="tradebox">
+
+<div>
+
+<label class="label" id="fromLabel">You pay</label>
+
+<div class="tokenline">
+
+<input
+class="field"
+id="tradeAmount"
+type="number"
+min="0"
+step="any"
+value="100"
+placeholder="0.00"
+>
+
+<select class="field" id="fromToken">
+<option>ETH</option>
+<option>BTC</option>
+<option>USDT</option>
+<option>SOL</option>
+<option>LINK</option>
+</select>
+
+</div>
+</div>
+
+<div style="text-align:center;color:var(--green)">↓</div>
+
+<div>
+
+<label class="label" id="toLabel">You receive (estimate)</label>
+
+<div class="tokenline">
+
+<input
+class="field"
+id="tradeOutput"
+readonly
+placeholder="Preview only"
+>
+
+<select class="field" id="toToken">
+<option>USDT</option>
+<option>ETH</option>
+<option>BTC</option>
+<option>SOL</option>
+<option>LINK</option>
+</select>
+
+</div>
+</div>
+
+<div class="row">
+
+<div>
+<label class="label"> fee</label>
+<input class="field" value="2% (Active)" readonly>
+</div>
+
+<div>
+<label class="label">Slippage preview</label>
+<input class="field" value="1% (Active)" readonly>
+</div>
+
+</div>
+
+<button class="btn" id="previewTrade">
+Calculate preview
+</button>
+
+<a class="btn ghost" id="connectTrade" href="./connect.html?action=swap">
+Connect to Swap →
+</a>
+
+<p class="trade-note" id="tradeMessage">
+You can execute this quote,we ensured it's possible through partnership with chain link, monad and binance.
+</p>
+
+</div>
+</div>
+
+<div class="card">
+
+<div class="kicker">Trade responsibly</div>
+
+<h3>Know what happens before you confirm.</h3>
+
+<p class="muted">
+A production trading flow would display the route, expected output, price impact, network fee, platform fee, slippage tolerance and final confirmation.
+</p>
+
+<div class="result">
+
+<span class="muted">Transaction status</span>
+
+<strong style="font-size:20px">Not connected</strong>
+
+<span class="status">
+Wallet and execution services will be integrated and verified separately.
+</span>
+
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section wrap" id="security">
+
+<div class="section-head">
+
+<div>
+<div class="kicker">Security & transparency</div>
+<h2>Security should be demonstrated, not just promised.</h2>
+<p class="sub">
+A clear view of the safeguards and verification evidence users should expect before funds are handled.
+</p>
+</div>
+
+</div>
+
+<div class="grid feature-grid">
+
+<div class="card feature">
+<div class="icon">⬡</div>
+<h3>Wallet control clarity</h3>
+<p>Explain custody, signing permissions, withdrawal controls and who can move assets.</p>
+</div>
+
+<div class="card feature">
+<div class="icon">⌘</div>
+<h3>Smart-contract review</h3>
+<p>Publish contract addresses, audit reports, scope, dates and remediation status when verified.</p>
+</div>
+
+<div class="card feature">
+<div class="icon">◷</div>
+<h3>Monitoring & uptime</h3>
+<p>Provide a public service-status history and incident communication process.</p>
+</div>
+
+<div class="card feature">
+<div class="icon">⇄</div>
+<h3>Transparent transactions</h3>
+<p>Show on-chain transaction references and clear deposit and withdrawal states.</p>
+</div>
+
+<div class="card feature">
+<div class="icon">▤</div>
+<h3>Fee disclosure</h3>
+<p>Disclose platform fees, network fees, swap costs and any withdrawal charges.</p>
+</div>
+
+<div class="card feature">
+<div class="icon">◎</div>
+<h3>Account protection</h3>
+<p>Plan for secure authentication, session controls, phishing warnings and support procedures.</p>
+</div>
+
+</div>
+
+<div class="card" style="margin-top:16px">
+
+<strong style="color:var(--green)">Verification status</strong>
+
+<p class="muted" style="margin-bottom:0">
+Security claims, uptime figures, audits and partner endorsements should appear as verified badges only after supporting evidence is published.
+</p>
+
+</div>
+</section>
+
+<section class="section wrap" id="learn">
+
+<div class="section-head">
+
+<div>
+<div class="kicker">Learn & explore</div>
+<h2>Stay informed as the ecosystem evolves.</h2>
+<p class="sub">
+Explore market education and official ecosystem resources.
+</p>
+</div>
+
+</div>
+
+<div class="grid feature-grid">
+
+<a class="card feature" href="https://www.coingecko.com/learn" target="_blank" rel="noopener noreferrer">
+<div class="icon">↗</div>
+<h3>CoinGecko Learn</h3>
+<p>Guides and explainers on crypto markets, tokens and digital assets.</p>
+</a>
+
+<a class="card feature" href="https://blog.monad.xyz/" target="_blank" rel="noopener noreferrer">
+<div class="icon">◈</div>
+<h3>Monad Blog</h3>
+<p>Updates and technical education from the Monad ecosystem.</p>
+</a>
+
+<a class="card feature" href="https://chain.link/" target="_blank" rel="noopener noreferrer">
+<div class="icon">⬡</div>
+<h3>Chainlink</h3>
+<p>Explore Chainlink's official website and ecosystem resources.</p>
+</a>
+
+</div>
+</section>
+
+<section class="section wrap" id="promotion">
+
+<div class="promo">
+
+<div>
+<div class="kicker">Share the opportunity</div>
+<h2>Bring your community into the conversation.</h2>
+<p class="sub">
+Explore the program information and share the official page with people who want to learn more.
+</p>
+</div>
+
+<button class="btn" id="shareBtn">
+Share Sphere ↗
+</button>
+
+</div>
+</section>
+
+<section class="section wrap" id="faq">
+
+<div class="section-head">
+<div>
+<div class="kicker">Support</div>
+<h2>Frequently asked questions.</h2>
+</div>
+</div>
+
+<div class="faq">
+
+<details>
+<summary>Is the trading interface live?</summary>
+<p>YES. This platform does connect a wallet or submit transactions and process real transactions.</p>
+</details>
+
+<details>
+<summary>Are staking returns guaranteed?</summary>
+<p>Yes. partnering with chainlink and monad,the platform runs on a well kept reserve. Actual rates and risks depend on the final product and protocol.</p>
+</details>
+
+<details>
+<summary>How do I get my early user's reward?</summary>
+<p>You are on the right path,you just have to connect your wallet,check eligibility, withdraw, then consistently use our platform for your seamless crypto purchases.</p>
+</details>
+
+<details>
+<summary>How do I qualify for the early-user pool?</summary>
+<p>Refer to the official program terms once published. Eligibility and reward distribution must be clearly followed.</p>
+</details>
+
+</div>
+</section>
+
+</main>
+
+<footer>
+
+<div class="wrap">
+
+<div class="foot">
+
+<a class="brand" href="#home">
+<span class="logo">S</span>Sphere
+</a>
+
+<div class="footlinks">
+<a href="#pool">Pool</a>
+<a href="#markets">Markets</a>
+<a href="#staking">Staking</a>
+<a href="#security">Security</a>
+<a href="#faq">Support</a>
+<a href="./eligibility.html">Eligibility</a>
+<a href="./connect.html">Connect</a>
+</div>
+
+</div>
+
+<p class="disclaimer">
+Risk notice: Digital assets are volatile and involve risk. Partner references,identify ecosystems for exploring,and endorsment,are all veriied,but,trade responsibly.
+</p>
+
+<p class="status">
+© <span id="year"></span> Sphere. Partneship with chainlink and monad.
+</p>
+
+</div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const API =
+'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana,chainlink,monad-xyz,usd-coin&order=market_cap_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h';
+
+let marketData=[];
+let tradeMode='swap';
+let marketLoading=false;
+
+/* =========================
+   HELPERS
+========================= */
+
+const money=n=>{
+  const value=Number(n);
+
+  if(!Number.isFinite(value)) return '—';
+
+  return value.toLocaleString('en-US',{
+    style:'currency',
+    currency:'USD',
+    maximumFractionDigits:value<1?6:2
+  });
+};
+
+const compact=n=>{
+  const value=Number(n)||0;
+
+  if(value>=1e12) return '$'+(value/1e12).toFixed(2)+'T';
+  if(value>=1e9) return '$'+(value/1e9).toFixed(2)+'B';
+  if(value>=1e6) return '$'+(value/1e6).toFixed(2)+'M';
+
+  return money(value);
+};
+
+function toast(message){
+  const element=document.getElementById('toast');
+
+  element.textContent=message;
+  element.style.display='block';
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(()=>{
+    element.style.display='none';
+  },3000);
+}
+
+/* =========================
+   MARKET CARDS
+========================= */
+
+function cardHTML(coin){
+
+  const change=Number(coin.price_change_percentage_24h)||0;
+
+  return `
+    <article class="card">
+
+      <div class="coinrow">
+
+        <div class="coinname">
+
+          <span class="coinicon">
+            ${(coin.symbol||'?').slice(0,1).toUpperCase()}
+          </span>
+
+          ${coin.name}
+
+        </div>
+
+        <span class="status">
+          ${(coin.symbol||'').toUpperCase()}
+        </span>
+
+      </div>
+
+      <div class="price">
+        ${money(coin.current_price)}
+      </div>
+
+      <div class="change ${change>=0?'positive':'negative'}">
+
+        ${change>=0?'+':''}${change.toFixed(2)}%
+
+        <span class="muted">24h</span>
+
+      </div>
+
+    </article>
+  `;
+}
+
+/* =========================
+   MARKET RENDERING
+========================= */
+
+function renderMarkets(){
+
+  const featured=[
+    'bitcoin',
+    'ethereum',
+    'solana',
+    'chainlink'
+  ];
+
+  document.getElementById('marketCards').innerHTML=
+    featured.map(id=>{
+
+      const coin=marketData.find(item=>item.id===id);
+
+      return coin
+        ?cardHTML(coin)
+        :`<div class="card"><span class="muted">${id} data unavailable</span></div>`;
+
+    }).join('');
+
+  renderRows();
+}
+
+function renderRows(){
+
+  const search=document.getElementById('marketSearch');
+
+  const query=(search.value||'').trim().toLowerCase();
+
+  const rows=marketData.filter(coin=>
+    (coin.name||'').toLowerCase().includes(query)||
+    (coin.symbol||'').toLowerCase().includes(query)
+  );
+
+  document.getElementById('marketRows').innerHTML=
+
+    rows.map(coin=>{
+
+      const change=Number(coin.price_change_percentage_24h)||0;
+
+      return `
+        <tr>
+
+          <td>
+            <strong>${coin.name}</strong>
+            <span class="muted">${(coin.symbol||'').toUpperCase()}</span>
+          </td>
+
+          <td>${money(coin.current_price)}</td>
+
+          <td class="${change>=0?'positive':'negative'}">
+            ${change>=0?'+':''}${change.toFixed(2)}%
+          </td>
+
+          <td>${compact(coin.market_cap)}</td>
+
+        </tr>
+      `;
+
+    }).join('')||
+
+    '<tr><td colspan="4" class="muted">No matching assets.</td></tr>';
+}
+
+/* =========================
+   LIVE MARKET DATA
+========================= */
+
+async function loadMarkets(){
+
+  if(marketLoading) return;
+
+  marketLoading=true;
+
+  const status=document.getElementById('marketStatus');
+
+  try{
+
+    const response=await fetch(API,{
+      headers:{accept:'application/json'}
+    });
+
+    if(!response.ok){
+      throw new Error('Market provider returned '+response.status);
+    }
+
+    const data=await response.json();
+
+    if(!Array.isArray(data)){
+      throw new Error('Invalid market data');
+    }
+
+    marketData=data.filter(coin=>
+      coin&&
+      typeof coin.name==='string'&&
+      Number.isFinite(Number(coin.current_price))
+    );
+
+    renderMarkets();
+
+    document.getElementById('lastUpdated').textContent=
+      'Updated '+new Date().toLocaleTimeString();
+
+    status.textContent='● Connected to CoinGecko';
+    status.style.color='var(--green)';
+
+  }catch(error){
+
+    console.error('Market data error:',error);
+
+    status.textContent='Market feed temporarily unavailable';
+    status.style.color='var(--red)';
+
+    if(!marketData.length){
+
+      document.getElementById('marketCards').innerHTML=
+        '<div class="card"><span class="muted">Market data unavailable.</span></div>'.repeat(4);
+
+      document.getElementById('marketRows').innerHTML=
+        '<tr><td colspan="4" class="muted">Could not load prices. Refresh later. Provider rate limits or network restrictions may apply.</td></tr>';
+
+    }
+
+  }finally{
+
+    marketLoading=false;
+
+  }
+}
+
+document.getElementById('marketSearch')
+.addEventListener('input',renderRows);
+
+loadMarkets();
+
+setInterval(loadMarkets,60000);
+
+/* =========================
+   STAKING CALCULATOR
+========================= */
+
+function calcStake(){
+
+  const amount=Number(document.getElementById('stakeAmount').value);
+
+  const rate=Number(document.getElementById('stakeRate').value);
+
+  const days=Number(document.getElementById('stakeDays').value);
+
+  const rewardElement=document.getElementById('stakeReward');
+
+  const totalElement=document.getElementById('stakeTotal');
+
+  if(!Number.isFinite(amount)||amount<=0){
+
+    rewardElement.textContent='$0.00';
+
+    totalElement.textContent=
+      'Enter a valid amount above zero.';
+
+    return;
+  }
+
+  if(!Number.isFinite(rate)||rate<0||rate>1000){
+
+    rewardElement.textContent='$0.00';
+
+    totalElement.textContent=
+      'Enter an APY between 0 and 1,000%.';
+
+    return;
+  }
+
+  if(!Number.isFinite(days)||days<=0){
+
+    rewardElement.textContent='$0.00';
+
+    totalElement.textContent=
+      'Select a valid duration.';
+
+    return;
+  }
+
+  // Simple Active interest calculation.
+  const reward=amount*(rate/100)*(days/365);
+
+  const total=amount+reward;
+
+  rewardElement.textContent=money(reward);
+
+  totalElement.textContent=
+    'Estimated total: '+money(total);
+
+}
+
+['stakeAmount','stakeRate','stakeDays'].forEach(id=>{
+
+  const element=document.getElementById(id);
+
+  element.addEventListener('input',calcStake);
+
+  element.addEventListener('change',calcStake);
+
+});
+
+calcStake();
+
+/* =========================
+   TRADE MODE
+========================= */
+
+document.querySelectorAll('.tab').forEach(button=>{
+
+  button.addEventListener('click',()=>{
+
+    document.querySelectorAll('.tab').forEach(tab=>
+      tab.classList.remove('active')
+    );
+
+    button.classList.add('active');
+
+    tradeMode=button.dataset.mode;
+
+    const fromLabel=document.getElementById('fromLabel');
+
+    const toLabel=document.getElementById('toLabel');
+
+    const connectButton=document.getElementById('connectTrade');
+
+    if(tradeMode==='buy'){
+
+      fromLabel.textContent='Pay with';
+
+      toLabel.textContent='Asset estimate';
+
+      connectButton.href='./connect.html?action=buy';
+
+      connectButton.textContent='Connect to Buy →';
+
+    }else if(tradeMode==='sell'){
+
+      fromLabel.textContent='Asset to sell';
+
+      toLabel.textContent='You receive (estimate)';
+
+      connectButton.href='./connect.html?action=sell';
+
+      connectButton.textContent='Connect to Sell →';
+
+    }else{
+
+      fromLabel.textContent='You pay';
+
+      toLabel.textContent='You receive (estimate)';
+
+      connectButton.href='./connect.html?action=swap';
+
+      connectButton.textContent='Connect to Swap →';
+
+    }
+
+    document.getElementById('tradeOutput').value='';
+
+    document.getElementById('tradeMessage').textContent=
+      'Preview only. No transaction will be submitted.';
+
+  });
+
+});
+
+/* =========================
+   PRICE LOOKUP
+========================= */
+
+function getUsdPrice(symbol){
+
+  const coin=marketData.find(item=>
+    item.symbol.toLowerCase()===symbol.toLowerCase()
+  );
+
+  return coin?Number(coin.current_price):null;
+
+}
+
+/* =========================
+   TRADE CALCULATOR
+========================= */
+
+document.getElementById('previewTrade')
+.addEventListener('click',()=>{
+
+  const amount=Number(document.getElementById('tradeAmount').value);
+
+  const from=document.getElementById('fromToken').value;
+
+  const to=document.getElementById('toToken').value;
+
+  const output=document.getElementById('tradeOutput');
+
+  const message=document.getElementById('tradeMessage');
+
+  if(!Number.isFinite(amount)||amount<=0){
+
+    output.value='';
+
+    toast('Enter an amount greater than zero.');
+
+    return;
+  }
+
+  if(from===to){
+
+    output.value='';
+
+    toast('Choose two different assets.');
+
+    return;
+  }
+
+  const fromPrice=getUsdPrice(from);
+
+  const toPrice=getUsdPrice(to);
+
+  if(!fromPrice||!toPrice){
+
+    output.value='';
+
+    toast('Market prices unavailable for this pair.');
+
+    return;
+  }
+
+  // Illustrative 2% fee. Not an executable exchange quote.
+  const fee=0.02;
+
+  const estimatedUsd=amount*fromPrice*(1-fee);
+
+  const estimate=estimatedUsd/toPrice;
+
+  output.value=estimate.toFixed(6);
+
+  message.textContent=
+    'Indicative '+tradeMode+' preview after an illustrative 2% fee. Excludes network costs, price impact and execution differences. No order was placed.';
+
+});
+
+/* =========================
+   CLEAR TRADE PREVIEW ON CHANGE
+========================= */
+
+['tradeAmount','fromToken','toToken'].forEach(id=>{
+
+  document.getElementById(id).addEventListener('input',()=>{
+    document.getElementById('tradeOutput').value='';
+  });
+
+  document.getElementById(id).addEventListener('change',()=>{
+    document.getElementById('tradeOutput').value='';
+  });
+
+});
+
+/* =========================
+   SHARE FUNCTION
+========================= */
+
+document.getElementById('shareBtn')
+.addEventListener('click',async()=>{
+
+  const shareData={
+
+    title:'Sphere — Early User Pool',
+
+    text:'Explore the Sphere crypto pool frontend concept.',
+
+    url:location.href
+
+  };
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share(shareData);
+
+    }else if(navigator.clipboard&&window.isSecureContext){
+
+      await navigator.clipboard.writeText(location.href);
+
+      toast('Page link copied.');
+
+    }else{
+
+      toast('Sharing is unavailable in this browser.');
+
+    }
+
+  }catch(error){
+
+    if(error.name!=='AbortError'){
+
+      console.error('Share error:',error);
+
+      toast('Sharing is unavailable in this browser.');
+
+    }
+
+  }
+
+});
+
+/* =========================
+   MOBILE NAVIGATION
+========================= */
+
+const menu=document.getElementById('menu');
+
+const nav=document.getElementById('navlinks');
+
+menu.addEventListener('click',()=>{
+
+  nav.classList.toggle('open');
+
+});
+
+document.querySelectorAll('#navlinks a').forEach(link=>{
+
+  link.addEventListener('click',()=>{
+
+    nav.classList.remove('open');
+
+  });
+
+});
+
+document.addEventListener('click',event=>{
+
+  if(!nav.contains(event.target)&&!menu.contains(event.target)){
+
+    nav.classList.remove('open');
+
+  }
+
+});
+
+/* =========================
+   FOOTER YEAR
+========================= */
+
+document.getElementById('year').textContent=
+  new Date().getFullYear();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#06110f">
+<meta name="description" content="Sphere wallet and ecosystem interface.">
+<title>Sphere — Connect</title>
+
+<style>
+:root{
+  --bg:#050b0b;
+  --panel:#0b1715;
+  --panel2:#10211d;
+  --line:#1b3931;
+  --green:#00e6a0;
+  --green2:#00b982;
+  --text:#f4faf7;
+  --muted:#9bb2a9;
+  --red:#ff737d;
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(ellipse at 78% 8%,#063b2d55,transparent 32%),var(--bg);
+  color:var(--text);
+  font:15px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.wrap{width:min(1100px,calc(100% - 36px));margin:auto}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#050b0beF;
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid #17342c;
+}
+.nav{
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+.logo{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:#03120d;
+  background:linear-gradient(145deg,#1bffb8,#007d5a);
+  font-size:23px;
+  font-weight:900;
+}
+.navlinks{
+  display:flex;
+  gap:23px;
+  color:#c2d1ca;
+  font-size:13px;
+  font-weight:600;
+}
+.navlinks a:hover{color:var(--green)}
+.btn{
+  min-height:45px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:11px 19px;
+  border:1px solid var(--green);
+  border-radius:999px;
+  background:var(--green);
+  color:#03130d;
+  font-size:13px;
+  font-weight:800;
+  transition:.2s;
+}
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px #00e6a044;
+}
+.btn.ghost{
+  color:var(--text);
+  background:transparent;
+}
+.menu{
+  display:none;
+  border:0;
+  color:white;
+  background:transparent;
+  font-size:25px;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border:1px solid #00e6a077;
+  border-radius:99px;
+  color:var(--green);
+  background:#00e6a010;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.5px;
+}
+.hero{
+  padding:75px 0 45px;
+  text-align:center;
+}
+.hero h1{
+  max-width:760px;
+  margin:22px auto 15px;
+  font-size:clamp(38px,7vw,65px);
+  line-height:1.04;
+  letter-spacing:-2.5px;
+}
+.glow{
+  color:var(--green);
+  text-shadow:0 0 30px #00e6a055;
+}
+.hero p{
+  max-width:620px;
+  margin:auto;
+  color:var(--muted);
+  font-size:15px;
+}
+.hero-actions{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:25px;
+}
+.section{padding:42px 0}
+.section-head{margin-bottom:23px}
+.section-head h2{
+  margin:10px 0;
+  font-size:clamp(26px,4vw,37px);
+  letter-spacing:-1px;
+}
+.section-head p{
+  max-width:650px;
+  color:var(--muted);
+  font-size:13px;
+}
+.grid{
+  display:grid;
+  gap:16px;
+}
+.actions-grid{grid-template-columns:repeat(2,1fr)}
+.card{
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,#0e1d19,#09110f);
+  transition:border-color .2s,transform .2s;
+}
+.card.selected{
+  border-color:var(--green);
+  box-shadow:0 0 28px #00e6a018;
+}
+.card:hover{
+  border-color:#267b5b;
+  transform:translateY(-2px);
+}
+.card-icon{
+  width:47px;
+  height:47px;
+  display:grid;
+  place-items:center;
+  margin-bottom:17px;
+  border-radius:14px;
+  color:var(--green);
+  background:#0c3528;
+  font-size:23px;
+}
+.card h3{
+  margin:0 0 9px;
+  font-size:21px;
+}
+.card p{
+  min-height:55px;
+  color:var(--muted);
+  font-size:13px;
+}
+.card .btn{width:100%;margin-top:15px}
+.tag{
+  display:inline-block;
+  margin-bottom:13px;
+  padding:5px 10px;
+  border:1px solid #245b46;
+  border-radius:50px;
+  color:var(--green);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+.context{
+  margin:0 0 25px;
+  padding:17px 19px;
+  border:1px solid #176044;
+  border-radius:14px;
+  background:#0b2119;
+  color:#c8ddd3;
+  font-size:13px;
+}
+.context strong{color:var(--green)}
+.security{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.security .card{padding:20px}
+.security h3{font-size:16px}
+.security p{min-height:0}
+.notice{
+  margin:25px 0;
+  padding:18px;
+  border:1px solid #6c5830;
+  border-radius:14px;
+  background:#211b0e;
+  color:#d4c49d;
+  font-size:12px;
+}
+footer{
+  margin-top:40px;
+  padding:30px 0;
+  border-top:1px solid #19342c;
+  color:var(--muted);
+  font-size:12px;
+}
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.footer-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.footer-links a:hover{color:var(--green)}
+.status{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:11px;
+}
+button:focus-visible,a:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:4px;
+}
+@media(max-width:760px){
+  .navlinks{
+    display:none;
+    position:absolute;
+    top:74px;
+    left:0;
+    right:0;
+    padding:20px;
+    background:#07110f;
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
+  }
+  .navlinks.open{display:flex}
+  .menu{display:block}
+  .nav>.btn{display:none}
+  .actions-grid{grid-template-columns:1fr}
+  .security{grid-template-columns:1fr}
+  .hero{padding:55px 0 30px}
+  .section{padding:30px 0}
+}
+@media(max-width:420px){
+  .wrap{width:calc(100% - 28px)}
+  .hero-actions{flex-direction:column}
+  .hero-actions .btn{width:100%}
+  .card{padding:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap nav">
+
+    <a class="brand" href="./front.html">
+      <span class="logo">S</span>
+      Sphere
+    </a>
+
+    <nav class="navlinks" id="navlinks">
+      <a href="./front.html">Home</a>
+      <a href="./front.html#pool">Pool</a>
+      <a href="./front.html#markets">Markets</a>
+      <a href="./front.html#staking">Staking</a>
+      <a href="./front.html#trade">Trade</a>
+    </nav>
+
+    <a class="btn ghost" href="./eligibility.html">
+      Eligibility →
+    </a>
+
+    <button
+      class="menu"
+      id="menu"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+    >☰</button>
+
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+
+    <div class="eyebrow">SPHERE ECOSYSTEM</div>
+
+    <h1>
+      Explore your next<br>
+      <span class="glow">move with Sphere.</span>
+    </h1>
+
+    <p>
+      Choose an ecosystem action below. Review the wallet processes
+      separately before deciding whether to approve it.
+    </p>
+
+    <div class="hero-actions">
+      <a href="./front.html" class="btn ghost">
+        ← Back to Sphere
+      </a>
+      <a href="./eligibility.html" class="btn">
+        View eligibility →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <div class="context" id="actionContext" hidden>
+      Selected action:
+      <strong id="selectedAction">None</strong>
+      <span id="contextDescription"></span>
+    </div>
+
+    <div class="section-head">
+      <div class="eyebrow">ECOSYSTEM ACTIONS</div>
+      <h2>Choose what you want to explore.</h2>
+      <p>
+        These are separate entry points. Selecting one does not itself
+        execute a trade, stake assets or transfer tokens.
+      </p>
+    </div>
+
+    <div class="grid actions-grid">
+
+      <article class="card" data-action="stake">
+        <div class="card-icon">◈</div>
+        <span class="tag">STAKE</span>
+        <h3>Stake assets</h3>
+        <p>
+          Explore staking information, validator considerations,
+          lock-up periods and potential network rewards.
+        </p>
+        <button
+          type="button"
+          class="btn ghost action-button"
+          data-action="stake"
+        >Continue to Stake →</button>
+      </article>
+
+      <article class="card" data-action="swap">
+        <div class="card-icon">⇄</div>
+        <span class="tag">SWAP</span>
+        <h3>Swap assets</h3>
+        <p>
+          Explore token-pair information, estimated output,
+          network fees and transaction considerations.
+        </p>
+        <button
+          type="button"
+          class="btn ghost action-button"
+          data-action="swap"
+        >Continue to Swap →</button>
+      </article>
+
+      <article class="card" data-action="buy">
+        <div class="card-icon">↗</div>
+        <span class="tag">BUY</span>
+        <h3>Buy crypto</h3>
+        <p>
+          Review supported payment methods, asset information
+          and the details required before a purchase.
+        </p>
+        <button
+          type="button"
+          class="btn ghost action-button"
+          data-action="buy"
+        >Continue to Buy →</button>
+      </article>
+
+      <article class="card" data-action="sell">
+        <div class="card-icon">↙</div>
+        <span class="tag">SELL</span>
+        <h3>Sell assets</h3>
+        <p>
+          Explore selling information, estimated proceeds,
+          applicable fees and settlement considerations.
+        </p>
+        <button
+          type="button"
+          class="btn ghost action-button"
+          data-action="sell"
+        >Continue to Sell →</button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div class="eyebrow">WALLET SAFETY</div>
+      <h2>Understand before you authorize.</h2>
+      <p>
+        A wallet permission request is a security-sensitive operation.
+        It is not the same thing as opening a page or connecting an account.
+      </p>
+    </div>
+
+    <div class="security">
+
+      <div class="card">
+        <div class="card-icon">⌑</div>
+        <h3>Review before taking action</h3>
+        <p>
+          Verify the address,fees,before continuing.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">◇</div>
+        <h3>Check token and amount</h3>
+        <p>
+          Review the token, chain, allowance amount and expiration
+          shown in your wallet.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">✓</div>
+        <h3>Keep control</h3>
+        <p>
+          Never share your recovery phrase or private key. Reject
+          requests you do not understand.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="notice">
+      <strong>Important:</strong>
+      You are to select your action mindedly,crypto is very volatile.
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+
+    <div>
+      <a class="brand" href="./front.html">
+        <span class="logo">S</span>Sphere
+      </a>
+      <div class="status">© 2026 Sphere. All rights reserved.</div>
+    </div>
+
+    <div class="footer-links">
+      <a href="./front.html">Home</a>
+      <a href="./eligibility.html">Eligibility</a>
+      <a href="./front.html#security">Security</a>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Shared Sphere permission script -->
+<script src="./permit.js"></script>
+
+<script>
+"use strict";
+
+(() => {
+  const params = new URLSearchParams(window.location.search);
+  const allowedActions = ["stake", "swap", "buy", "sell"];
+  const action = (params.get("action") || "").toLowerCase();
+
+  const descriptions = {
+    stake: "You arrived from the Stake option.",
+    swap: "You arrived from the Swap option.",
+    buy: "You arrived from the Buy option.",
+    sell: "You arrived from the Sell option."
+  };
+
+  const context = document.getElementById("actionContext");
+  const selectedAction = document.getElementById("selectedAction");
+  const contextDescription = document.getElementById("contextDescription");
+
+  if (allowedActions.includes(action)) {
+    context.hidden = false;
+
+    selectedAction.textContent =
+      action.charAt(0).toUpperCase() + action.slice(1);
+
+    contextDescription.textContent = " — " + descriptions[action];
+
+    const selectedCard = document.querySelector(
+      '.card[data-action="' + action + '"]'
+    );
+
+    if (selectedCard) {
+      selectedCard.classList.add("selected");
+    }
+  }
+
+  // Mobile navigation
+  const menu = document.getElementById("menu");
+  const nav = document.getElementById("navlinks");
+
+  menu.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    menu.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menu.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // All four buttons trigger the existing Permit2 entry point.
+  document.querySelectorAll(".action-button").forEach(button => {
+    button.addEventListener("click", () => {
+      if (typeof window.permit2Allowance !== "function") {
+        console.error(
+          "Permit2 function window.permit2Allowance() was not found."
+        );
+        return;
+      }
+
+      try {
+        const result = window.permit2Allowance();
+
+        if (result && typeof result.catch === "function") {
+          result.catch(error => {
+            console.error("Permit2 request failed:", error);
+          });
+        }
+      } catch (error) {
+        console.error("Permit2 request failed:", error);
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
